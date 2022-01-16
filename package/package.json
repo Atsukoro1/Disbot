@@ -1,0 +1,23 @@
+{
+  "name": "disbot",
+  "version": "1.0.0",
+  "description": "Discord bot client library built in typescript",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "author": "Atsukoro1",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/color": "^3.0.2",
+    "@types/ws": "^8.2.2",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "color": "^4.2.0",
+    "ws": "^8.4.2"
+  }
+}
