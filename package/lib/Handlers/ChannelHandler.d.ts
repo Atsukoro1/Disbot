@@ -14,4 +14,5 @@ export default class ChannelHandler {
     fetchPinnedMessages(): Promise<any>;
     pinMessage(params: string): void;
     unpinMessage(params: string): void;
+    followNewsChannel(params: string): void;
 }

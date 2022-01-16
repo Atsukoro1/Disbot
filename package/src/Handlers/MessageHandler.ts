@@ -54,4 +54,17 @@ export default class MessageHandler {
         if(!params) throw new Error("You must provide a emoji to delete.");
         await sendRequest("DELETE", undefined, encodeURI(`/channels/${this.message.channel?.id}/messages/${this.message.id}/reactions/${params}`), global.token);
     }
+
+    async edit(params:any) {
+        var body:any = {};
+        if(typeof(params) != "object") {
+            body.content = params;
+        } else {
+            body = params;
+        }
+
+        const response = await sendRequest("PATCH", body, `/channels/${this.message.channel?.id}/messages/${this.message.id}`, global.token);
+        if(!response) return false;
+        return response;
+    }
 }

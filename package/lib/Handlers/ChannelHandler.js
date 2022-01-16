@@ -278,6 +278,11 @@ var ChannelHandler = /** @class */ (function () {
             throw new Error("You must provide a message id");
         (0, RequestHandler_1.default)("DELETE", {}, "/channels/".concat(this.channel.id, "/pins/").concat(params), global.token);
     };
+    ChannelHandler.prototype.followNewsChannel = function (params) {
+        if (!params || typeof (params) != "string")
+            throw new Error("You must provide a channel id");
+        (0, RequestHandler_1.default)("POST", { webhook_channel_id: params }, "/channels/".concat(this.channel.id, "/followers"), global.token);
+    };
     return ChannelHandler;
 }());
 exports.default = ChannelHandler;

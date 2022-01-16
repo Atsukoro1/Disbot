@@ -5,8 +5,8 @@ export default class Embed {
     type: string | undefined;
     description: string | undefined;
     url: string | undefined;
-    timestamp: number | undefined;
-    color: number | undefined;
+    timestamp: string | undefined;
+    color: string | number | undefined;
 
     footer: {
         text: string | undefined;
@@ -19,7 +19,7 @@ export default class Embed {
             value: string | undefined;
             inline: boolean | undefined;
         }
-    ] | undefined;
+    ] | any;
 
     image: {
         url: string | undefined;
@@ -52,19 +52,79 @@ export default class Embed {
 
     constructor(data:any) {
         if(data) {
-            if(data.title) this.title = data.title;
-            if(data.type) this.type = data.type;
-            if(data.description) this.description = data.description;
-            if(data.url) this.url = data.url;
-            if(data.timestamp) this.timestamp = data.timestamp;
-            if(data.color) this.color = data.color;
-            if(data.footer) this.footer = data.footer;
-            if(data.fields) this.fields = data.fields;
-            if(data.image) this.image = data.image;
-            if(data.thumbnail) this.thumbnail = data.thumbnail;
-            if(data.video) this.video = data.video;
-            if(data.provider) this.provider = data.provider;
-            if(data.author) this.author = data.author;
+            if("title" in data) {
+                this.title = data.title;
+            }
+
+            if("type" in data) {
+                this.type = data.type;
+            }
+
+            if("description" in data) {
+                this.description = data.description;
+            }
+
+            if("url" in data) {
+                this.url = data.url;
+            }
+
+            if("timestamp" in data) {
+                this.timestamp = data.timestamp;
+            }
+
+            if("color" in data) {
+                this.color = new Color(data.color).rgbNumber();
+            }
+
+            if("footer" in data) {
+                this.footer = {
+                    text: data.footer.text,
+                    icon_url: data.footer.icon_url
+                };
+            }
+
+            if("fields" in data) {
+                this.fields = data.fields;
+            }
+
+            if("image" in data) {
+                this.image = {
+                    url: data.image.url,
+                    height: data.image.height,
+                    width: data.image.width
+                };
+            }
+
+            if("thumbnail" in data) {
+                this.thumbnail = {
+                    url: data.thumbnail.url,
+                    height: data.thumbnail.height,
+                    width: data.thumbnail.width
+                };
+            }
+
+            if("video" in data) {
+                this.video = {
+                    url: data.video.url,
+                    height: data.video.height,
+                    width: data.video.width
+                };
+            }
+
+            if("provider" in data) {
+                this.provider = {
+                    name: data.provider.name,
+                    url: data.provider.url
+                };
+            }
+
+            if("author" in data) {
+                this.author = {
+                    name: data.author.name,
+                    url: data.author.url,
+                    icon_url: data.author.icon_url
+                };
+            }
         }
     }
 
@@ -88,13 +148,75 @@ export default class Embed {
         return this;
     }
 
-    setTimestamp(timestamp:number = Date.now()) {
+    setTimestamp(timestamp:string = new Date().toISOString()) {
         this.timestamp = timestamp;
         return this;
     }
 
     setColor(color:number) {
         this.color = new Color(color).rgbNumber();;
+        return this;
+    }
+
+    setFooter(text:string, icon_url:string) {
+        this.footer = {
+            text: text,
+            icon_url: icon_url
+        };
+        return this;
+    };
+
+    addField(name:string, value:string, inline:boolean = false) {
+        this.fields = this.fields ?? [];
+        this.fields.push({
+            name: name,
+            value: value,
+            inline: inline
+        });
+        return this;
+    }
+
+    setImage(url:string, height:number, width:number) {
+        this.image = {
+            url: url,
+            height: height,
+            width: width
+        };
+        return this;
+    }
+
+    setThumbnail(url:string, height:number, width:number) {
+        this.thumbnail = {
+            url: url,
+            height: height,
+            width: width
+        };
+        return this;
+    }
+
+    setVideo(url:string, height:number, width:number) {
+        this.video = {
+            url: url,
+            height: height,
+            width: width
+        };
+        return this;
+    }
+
+    setProvider(name:string, url:string) {
+        this.provider = {
+            name: name,
+            url: url
+        };
+        return this;
+    }
+
+    setAuthor(name:string, url:string, icon_url:string) {
+        this.author = {
+            name: name,
+            url: url,
+            icon_url: icon_url
+        };
         return this;
     }
 }

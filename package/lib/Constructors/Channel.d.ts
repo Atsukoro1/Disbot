@@ -150,4 +150,11 @@ export default class Channel {
      * channel.unpinMessage("1234567890123456789");
      */
     unpinMessage(params: string): void;
+    /**
+     * Follow news channel
+     * @example
+     * // Follow news channel
+     * channel.followNewsChannel("1234567890123456789");
+     */
+    followNewsChannel(params: string): void;
 }

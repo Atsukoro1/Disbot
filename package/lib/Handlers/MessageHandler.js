@@ -171,6 +171,30 @@ var MessageHandler = /** @class */ (function () {
             });
         });
     };
+    MessageHandler.prototype.edit = function (params) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function () {
+            var body, response;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        body = {};
+                        if (typeof (params) != "object") {
+                            body.content = params;
+                        }
+                        else {
+                            body = params;
+                        }
+                        return [4 /*yield*/, (0, RequestHandler_1.default)("PATCH", body, "/channels/".concat((_a = this.message.channel) === null || _a === void 0 ? void 0 : _a.id, "/messages/").concat(this.message.id), global.token)];
+                    case 1:
+                        response = _b.sent();
+                        if (!response)
+                            return [2 /*return*/, false];
+                        return [2 /*return*/, response];
+                }
+            });
+        });
+    };
     return MessageHandler;
 }());
 exports.default = MessageHandler;

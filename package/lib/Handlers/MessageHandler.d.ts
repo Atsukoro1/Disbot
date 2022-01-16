@@ -10,4 +10,5 @@ export default class MessageHandler {
     removeUserReaction(params: any): Promise<void>;
     getReactions(params: any): Promise<any>;
     deleteAllReactionsForEmoji(params: string): Promise<void>;
+    edit(params: any): Promise<any>;
 }

@@ -164,4 +164,9 @@ export default class ChannelHandler {
         if(!params) throw new Error("You must provide a message id");
         sendRequest("DELETE", {}, `/channels/${this.channel.id}/pins/${params}`, global.token);
     }
+
+    followNewsChannel(params:string) {
+        if(!params || typeof(params) != "string") throw new Error("You must provide a channel id");
+        sendRequest("POST", { webhook_channel_id: params }, `/channels/${this.channel.id}/followers`, global.token);
+    }
 }

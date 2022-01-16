@@ -1,5 +1,8 @@
 import MessageHandler from "../Handlers/MessageHandler";
 import Channel from "./Channel";
+import Member from "./Member";
+import User from "./User";
+import Embed from "./Embed";
 
 export class Message {
     type:number | any;
@@ -22,8 +25,11 @@ export class Message {
     thread:any;
     applicationId:any
     stickerItems:any;
-    member:any;
+    member:Member | undefined;
     application: any;
+    mentions:any;
+    mentionRoles:any;
+    mentionChannels:any;
     author: object | any;
     channel:Channel|undefined;
 
@@ -81,7 +87,7 @@ export class Message {
             }
     
             if ("embeds" in data) {
-                this.embeds = data.embeds;
+                this.embeds = data.embeds.map((embed:object) => new Embed(embed));
             }
     
             if ("reactions" in data) {
@@ -121,11 +127,27 @@ export class Message {
             }
     
             if ("member" in data) {
-                this.member = data.member;
+                this.member = new Member(data.member);
             }
 
             if ("author" in data) {
-                this.author = data.author;
+                this.author = new User(data.author);
+            }
+
+            if ("mentions" in data) {
+                this.mentions = data.mentions;
+            }
+
+            if ("mention_roles" in data) {
+                this.mentionRoles = data.mention_roles;
+            }
+
+            if ("mention_channels" in data) {
+                this.mentionChannels = data.mention_channels;
+            }
+
+            if ("mention_everyone" in data) {
+                this.mentionEveryone = data.mention_everyone;
             }
         }
     }
@@ -221,6 +243,28 @@ export class Message {
     deleteAllReactionsForEmoji(params:string) {
         new MessageHandler(this).deleteAllReactionsForEmoji(params);
     };
+
+    /**
+     * Edit a message
+     * @type {String} content - Message content
+     * @type {Boolean} tts - Text to speech
+     * @type {number|string|any} nonce - Nonce
+     * @returns {Promise<Message>}
+     * @example
+     * // Edit message
+     * message.edit("Hello!");
+     * @example
+     * // Send message with options
+     * message.edit({
+     *    content: "Hello!"
+     * }); 
+     */
+    async edit(params:any) {
+        const handler = new MessageHandler(this)
+        const response = await handler.edit(params);
+        if(!response) return false;
+        return new Message(response);
+    }
 };
 
 export default Message;

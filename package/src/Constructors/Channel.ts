@@ -309,4 +309,14 @@ export default class Channel {
     unpinMessage(params:string) {
         const handler = new ChannelHandler(this).unpinMessage(params);
     }
+
+    /**
+     * Follow news channel
+     * @example
+     * // Follow news channel
+     * channel.followNewsChannel("1234567890123456789");
+     */
+    followNewsChannel(params:string) {
+        new ChannelHandler(this).followNewsChannel(params);
+    }
 }

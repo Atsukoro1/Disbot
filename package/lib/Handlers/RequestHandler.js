@@ -71,7 +71,7 @@ function sendRequest(method, data, path, token) {
                     return [2 /*return*/, res.data];
                 case 2:
                     err_1 = _a.sent();
-                    console.log(err_1.response.data);
+                    console.log(err_1.response.data.errors.embed.timestamp);
                     if (err_1.response.data.retry_after) {
                         setTimeout(function () {
                             sendRequest(method, data, path, token);

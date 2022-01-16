@@ -1,4 +1,5 @@
 import Channel from "./Channel";
+import Member from "./Member";
 export declare class Message {
     type: number | any;
     guildId: string | any;
@@ -20,8 +21,11 @@ export declare class Message {
     thread: any;
     applicationId: any;
     stickerItems: any;
-    member: any;
+    member: Member | undefined;
     application: any;
+    mentions: any;
+    mentionRoles: any;
+    mentionChannels: any;
     author: object | any;
     channel: Channel | undefined;
     /**
@@ -96,5 +100,21 @@ export declare class Message {
      * message.deleteAllReactionsForEmoji("💩");
      */
     deleteAllReactionsForEmoji(params: string): void;
+    /**
+     * Edit a message
+     * @type {String} content - Message content
+     * @type {Boolean} tts - Text to speech
+     * @type {number|string|any} nonce - Nonce
+     * @returns {Promise<Message>}
+     * @example
+     * // Edit message
+     * message.edit("Hello!");
+     * @example
+     * // Send message with options
+     * message.edit({
+     *    content: "Hello!"
+     * });
+     */
+    edit(params: any): Promise<false | Message>;
 }
 export default Message;

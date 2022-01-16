@@ -359,6 +359,15 @@ var Channel = /** @class */ (function () {
     Channel.prototype.unpinMessage = function (params) {
         var handler = new ChannelHandler_1.default(this).unpinMessage(params);
     };
+    /**
+     * Follow news channel
+     * @example
+     * // Follow news channel
+     * channel.followNewsChannel("1234567890123456789");
+     */
+    Channel.prototype.followNewsChannel = function (params) {
+        new ChannelHandler_1.default(this).followNewsChannel(params);
+    };
     return Channel;
 }());
 exports.default = Channel;

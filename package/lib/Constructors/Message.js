@@ -50,6 +50,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Message = void 0;
 var MessageHandler_1 = require("../Handlers/MessageHandler");
 var Channel_1 = require("./Channel");
+var Member_1 = require("./Member");
+var User_1 = require("./User");
+var Embed_1 = require("./Embed");
 var Message = /** @class */ (function () {
     /**
     * Creates a new Message object
@@ -93,7 +96,7 @@ var Message = /** @class */ (function () {
                 this.attachments = data.attachments;
             }
             if ("embeds" in data) {
-                this.embeds = data.embeds;
+                this.embeds = data.embeds.map(function (embed) { return new Embed_1.default(embed); });
             }
             if ("reactions" in data) {
                 this.reactions = data.reactions;
@@ -123,10 +126,22 @@ var Message = /** @class */ (function () {
                 this.stickerItems = data.sticker_items;
             }
             if ("member" in data) {
-                this.member = data.member;
+                this.member = new Member_1.default(data.member);
             }
             if ("author" in data) {
-                this.author = data.author;
+                this.author = new User_1.default(data.author);
+            }
+            if ("mentions" in data) {
+                this.mentions = data.mentions;
+            }
+            if ("mention_roles" in data) {
+                this.mentionRoles = data.mention_roles;
+            }
+            if ("mention_channels" in data) {
+                this.mentionChannels = data.mention_channels;
+            }
+            if ("mention_everyone" in data) {
+                this.mentionEveryone = data.mention_everyone;
             }
         }
     }
@@ -232,6 +247,38 @@ var Message = /** @class */ (function () {
         new MessageHandler_1.default(this).deleteAllReactionsForEmoji(params);
     };
     ;
+    /**
+     * Edit a message
+     * @type {String} content - Message content
+     * @type {Boolean} tts - Text to speech
+     * @type {number|string|any} nonce - Nonce
+     * @returns {Promise<Message>}
+     * @example
+     * // Edit message
+     * message.edit("Hello!");
+     * @example
+     * // Send message with options
+     * message.edit({
+     *    content: "Hello!"
+     * });
+     */
+    Message.prototype.edit = function (params) {
+        return __awaiter(this, void 0, void 0, function () {
+            var handler, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        handler = new MessageHandler_1.default(this);
+                        return [4 /*yield*/, handler.edit(params)];
+                    case 1:
+                        response = _a.sent();
+                        if (!response)
+                            return [2 /*return*/, false];
+                        return [2 /*return*/, new Message(response)];
+                }
+            });
+        });
+    };
     return Message;
 }());
 exports.Message = Message;
