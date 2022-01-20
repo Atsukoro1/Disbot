@@ -1,4 +1,4 @@
-import Channel from "../Constructors/Channel";
+import { Channel } from "../Constructors/Channel";
 export default class ChannelHandler {
     channel: Channel;
     constructor(data: Channel);

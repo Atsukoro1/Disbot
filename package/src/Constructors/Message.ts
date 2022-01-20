@@ -1,47 +1,54 @@
 import MessageHandler from "../Handlers/MessageHandler";
-import Channel from "./Channel";
-import Member from "./Member";
-import User from "./User";
-import Embed from "./Embed";
+
+import MessageTypes from "./Types/MessageType";
+
+import { Reaction } from "./Reaction";
+import { Channel } from "./Channel";
+import { Member } from "./Member";
+import { User } from "./User";
+import { Embed } from "./Embed";
 
 export class Message {
-    type:number | any;
-    guildId:string | any;
-    id:string | any;
-    createdAt:Date | any;
-    editedTimestamp:Date | any;
-    content:string | any;
-    pinned:boolean | any;
-    tts:boolean | any;
-    referencedMessage:any;
-    mentionEveryone:boolean | any;
-    attachments:any;
-    embeds:any;
-    reactions:any;
-    webhookId:string | any;
-    activity:any;
-    nonce:number | string | any;
-    interaction:any;
-    thread:any;
-    applicationId:any
-    stickerItems:any;
-    member:Member | undefined;
-    application: any;
-    mentions:any;
-    mentionRoles:any;
-    mentionChannels:any;
-    author: object | any;
-    channel:Channel|undefined;
+    type?: number;
+    guildId?: string;
+    id?: string;
+    createdAt?: Date;
+    editedTimestamp?: Date;
+    content?: string;
+    pinned?: boolean;
+    tts?: boolean;
+    referencedMessage?: Message;
+    mentionEveryone?: boolean;
+    attachments?: object;
+    embeds?: Array<Embed>;
+    reactions?: Array<Reaction>;
+    webhookId?: string;
+    activity?: object;
+    nonce?: number | string;
+    interaction?: object;
+    thread?: Channel;
+    applicationId?: string;
+    stickerItems?: Array<object>;
+    member?:Member;
+    application?: object;
+    mentions?: object;
+    mentionRoles?: object;
+    mentionChannels?: Array<object>;
+    author?: User;
+    channel?: Channel;
 
     /**
-    * Creates a new Message object
+    * Creates a new message
     * @class
-    * @param {object} data - Message data
+    * @param {object} [data={}] - Message data
+    * @see {@link https://discord.com/developers/docs/resources/channel#message-object} for further information
+    * @returns {Message}
     */
     constructor(data:any) {
         if(data) {
             if("type" in data) {
-                this.type = data.type;
+                let type:any = MessageTypes.find(m => m[1] === data.type)
+                this.type = type[0] ? type[0] : MessageTypes[0][0];
             }
     
             this.guildId = data.guild_id;
@@ -91,7 +98,7 @@ export class Message {
             }
     
             if ("reactions" in data) {
-                this.reactions = data.reactions;
+                this.reactions = data.reactions.map((r:object) => new Reaction(r));
             }
     
             if ("webhook_id" in data) {

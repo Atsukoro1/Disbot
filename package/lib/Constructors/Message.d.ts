@@ -1,37 +1,42 @@
-import Channel from "./Channel";
-import Member from "./Member";
+import { Reaction } from "./Reaction";
+import { Channel } from "./Channel";
+import { Member } from "./Member";
+import { User } from "./User";
+import { Embed } from "./Embed";
 export declare class Message {
-    type: number | any;
-    guildId: string | any;
-    id: string | any;
-    createdAt: Date | any;
-    editedTimestamp: Date | any;
-    content: string | any;
-    pinned: boolean | any;
-    tts: boolean | any;
-    referencedMessage: any;
-    mentionEveryone: boolean | any;
-    attachments: any;
-    embeds: any;
-    reactions: any;
-    webhookId: string | any;
-    activity: any;
-    nonce: number | string | any;
-    interaction: any;
-    thread: any;
-    applicationId: any;
-    stickerItems: any;
-    member: Member | undefined;
-    application: any;
-    mentions: any;
-    mentionRoles: any;
-    mentionChannels: any;
-    author: object | any;
-    channel: Channel | undefined;
+    type?: number;
+    guildId?: string;
+    id?: string;
+    createdAt?: Date;
+    editedTimestamp?: Date;
+    content?: string;
+    pinned?: boolean;
+    tts?: boolean;
+    referencedMessage?: Message;
+    mentionEveryone?: boolean;
+    attachments?: object;
+    embeds?: Array<Embed>;
+    reactions?: Array<Reaction>;
+    webhookId?: string;
+    activity?: object;
+    nonce?: number | string;
+    interaction?: object;
+    thread?: Channel;
+    applicationId?: string;
+    stickerItems?: Array<object>;
+    member?: Member;
+    application?: object;
+    mentions?: object;
+    mentionRoles?: object;
+    mentionChannels?: Array<object>;
+    author?: User;
+    channel?: Channel;
     /**
-    * Creates a new Message object
+    * Creates a new message
     * @class
-    * @param {object} data - Message data
+    * @param {object} [data={}] - Message data
+    * @see {@link https://discord.com/developers/docs/resources/channel#message-object} for further information
+    * @returns {Message}
     */
     constructor(data: any);
     /**

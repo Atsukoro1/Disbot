@@ -49,27 +49,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Message = void 0;
 var MessageHandler_1 = require("../Handlers/MessageHandler");
+var MessageType_1 = require("./Types/MessageType");
+var Reaction_1 = require("./Reaction");
 var Channel_1 = require("./Channel");
 var Member_1 = require("./Member");
 var User_1 = require("./User");
 var Embed_1 = require("./Embed");
 var Message = /** @class */ (function () {
     /**
-    * Creates a new Message object
+    * Creates a new message
     * @class
-    * @param {object} data - Message data
+    * @param {object} [data={}] - Message data
+    * @see {@link https://discord.com/developers/docs/resources/channel#message-object} for further information
+    * @returns {Message}
     */
     function Message(data) {
         if (data) {
             if ("type" in data) {
-                this.type = data.type;
+                var type = MessageType_1.default.find(function (m) { return m[1] === data.type; });
+                this.type = type[0] ? type[0] : MessageType_1.default[0][0];
             }
             this.guildId = data.guild_id;
             if ("id" in data) {
                 this.id = data.id;
             }
             if ("channel_id" in data) {
-                this.channel = new Channel_1.default({ id: data.channel_id });
+                this.channel = new Channel_1.Channel({ id: data.channel_id });
             }
             if ("timestamp" in data) {
                 this.createdAt = new Date(data.timestamp);
@@ -96,10 +101,10 @@ var Message = /** @class */ (function () {
                 this.attachments = data.attachments;
             }
             if ("embeds" in data) {
-                this.embeds = data.embeds.map(function (embed) { return new Embed_1.default(embed); });
+                this.embeds = data.embeds.map(function (embed) { return new Embed_1.Embed(embed); });
             }
             if ("reactions" in data) {
-                this.reactions = data.reactions;
+                this.reactions = data.reactions.map(function (r) { return new Reaction_1.Reaction(r); });
             }
             if ("webhook_id" in data) {
                 this.webhookId = data.webhook_id;
@@ -126,10 +131,10 @@ var Message = /** @class */ (function () {
                 this.stickerItems = data.sticker_items;
             }
             if ("member" in data) {
-                this.member = new Member_1.default(data.member);
+                this.member = new Member_1.Member(data.member);
             }
             if ("author" in data) {
-                this.author = new User_1.default(data.author);
+                this.author = new User_1.User(data.author);
             }
             if ("mentions" in data) {
                 this.mentions = data.mentions;

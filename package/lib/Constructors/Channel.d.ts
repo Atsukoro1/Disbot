@@ -1,5 +1,5 @@
 import Message from "./Message";
-export default class Channel {
+export declare class Channel {
     id: string | undefined;
     type: number | undefined;
     guildId: string | undefined;
@@ -26,6 +26,13 @@ export default class Channel {
     member: Object | undefined;
     defaultAutoArchiveDuration: number | undefined;
     permissions: string | undefined;
+    /**
+    * Creates a new channel
+    * @class
+    * @param {object} [data={}] - Channel data
+    * @see {@link https://discord.com/developers/docs/resources/channel#channel-object} for further information
+    * @returns {Channel}
+    */
     constructor(data: any);
     /**
      * Send message to channel

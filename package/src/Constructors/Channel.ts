@@ -1,34 +1,42 @@
 import ChannelHandler from "../Handlers/ChannelHandler";
 import Message from "./Message";
+import ChannelTypes from "./Types/ChannelType";
 
-export default class Channel {
-    id:string|undefined;
-    type:number|undefined;
-    guildId:string|undefined;
-    position:number|undefined;
-    permissions_overwrites:Array<Object>|undefined;
-    name:string|undefined;
-    topic:string|undefined;
-    nsfw:boolean|undefined;
-    lastMessageId:string|undefined;
-    bitrate:number|undefined;
-    user_limit:number|undefined;
-    rate_limit_per_user:number|undefined;
-    recipients:Array<Object>|undefined;
-    icon:string|undefined;
-    ownerId:string|undefined;
-    applicationId:string|undefined;
-    parentId:string|undefined;
-    lastPinTimestamp:string|undefined;
-    rtcRegion:string|undefined;
-    videoQualityMode:number|undefined;
-    messageCount:number|undefined;
-    memberCount:number|undefined;
-    threadMetadata:Object|undefined;
-    member:Object|undefined;
-    defaultAutoArchiveDuration:number|undefined;
-    permissions:string|undefined;
+export class Channel {
+    id!: string;
+    type?: number;
+    guildId?: string;
+    position?: number;
+    permissions_overwrites?: Array<Object>;
+    name?: string;
+    topic?: string;
+    nsfw?: boolean;
+    lastMessageId?: string;
+    bitrate?: number;
+    user_limit?: number;
+    rate_limit_per_user?: number;
+    recipients?: Array<Object>;
+    icon?: string;
+    ownerId?: string;
+    applicationId?: string;
+    parentId?: string;
+    lastPinTimestamp?: string;
+    rtcRegion?: string;
+    videoQualityMode?: number;
+    messageCount?: number;
+    memberCount?: number;
+    threadMetadata?: Object;
+    member?: Object;
+    defaultAutoArchiveDuration?: number;
+    permissions?: string;
 
+    /**
+    * Creates a new channel
+    * @class
+    * @param {object} [data={}] - Channel data
+    * @see {@link https://discord.com/developers/docs/resources/channel#channel-object} for further information
+    * @returns {Channel}
+    */
     constructor(data:any) {
         if(data) {
             if("id" in data) {
@@ -36,7 +44,8 @@ export default class Channel {
             }
 
             if("type" in data) {
-                this.type = data.type;
+                let type:any = ChannelTypes.find(m => m[1] === data.type)
+                this.type = type[0] ? type[0] : ChannelTypes[0][0];
             }
 
             if("guild_id" in data) {

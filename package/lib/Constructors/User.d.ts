@@ -1,4 +1,4 @@
-export default class User {
+export declare class User {
     id: string | undefined;
     username: string | undefined;
     discriminator: string | undefined;
@@ -14,5 +14,12 @@ export default class User {
     flags: number | undefined;
     premiumType: number | undefined;
     publicFlags: number | undefined;
+    /**
+    * Creates a new User
+    * @class
+    * @param {object} [data={}] - User data
+    * @see {@link https://discord.com/developers/docs/resources/user#user-object} for further information
+    * @returns {User}
+    */
     constructor(data: any);
 }

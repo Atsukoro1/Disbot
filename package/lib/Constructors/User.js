@@ -1,6 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.User = void 0;
 var User = /** @class */ (function () {
+    /**
+    * Creates a new User
+    * @class
+    * @param {object} [data={}] - User data
+    * @see {@link https://discord.com/developers/docs/resources/user#user-object} for further information
+    * @returns {User}
+    */
     function User(data) {
         if (data) {
             if ("id" in data) {
@@ -52,4 +60,4 @@ var User = /** @class */ (function () {
     }
     return User;
 }());
-exports.default = User;
+exports.User = User;

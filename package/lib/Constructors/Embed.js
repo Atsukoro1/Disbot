@@ -1,7 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Embed = void 0;
 var Color = require("color");
 var Embed = /** @class */ (function () {
+    /**
+    * Creates a new embed
+    * @class
+    * @param {object} [data={}] - Embed data
+    * @see {@link https://discord.com/developers/docs/resources/channel#embed-object} for further information
+    * @returns {Embed}
+    */
     function Embed(data) {
         if (data) {
             if ("title" in data) {
@@ -67,32 +75,67 @@ var Embed = /** @class */ (function () {
             }
         }
     }
+    /**
+     * Set title of the embed
+     * @param {string} title
+     * @returns {Embed}
+     */
     Embed.prototype.setTitle = function (title) {
         this.title = title;
         return this;
     };
+    /**
+     * Set type of the embed
+     * @param {string} type
+     * @returns {Embed}
+     */
     Embed.prototype.setType = function (type) {
         this.type = type;
         return this;
     };
+    /**
+     * Set description of the embed
+     * @param {string} description
+     * @returns {Embed}
+     */
     Embed.prototype.setDescription = function (description) {
         this.description = description;
         return this;
     };
+    /**
+     * Set url of the embed
+     * @param {string} url
+     * @returns {Embed}
+     */
     Embed.prototype.setUrl = function (url) {
         this.url = url;
         return this;
     };
+    /**
+     * Set timestamp of the embed located in the footer
+     * @param {string} timestamp
+     * @returns {Embed}
+     */
     Embed.prototype.setTimestamp = function (timestamp) {
         if (timestamp === void 0) { timestamp = new Date().toISOString(); }
         this.timestamp = timestamp;
         return this;
     };
+    /**
+     * Set color of the embed
+     * @param {string} color
+     * @returns {Embed}
+     */
     Embed.prototype.setColor = function (color) {
         this.color = new Color(color).rgbNumber();
-        ;
         return this;
     };
+    /**
+     * Set parameters of the embed footer
+     * @param {string} text
+     * @param {string} icon_url
+     * @returns {Embed}
+     */
     Embed.prototype.setFooter = function (text, icon_url) {
         this.footer = {
             text: text,
@@ -101,6 +144,13 @@ var Embed = /** @class */ (function () {
         return this;
     };
     ;
+    /**
+     * Add fields to the footer
+     * @param {string} name
+     * @param {string} value
+     * @param {string} inline
+     * @returns {Embed}
+     */
     Embed.prototype.addField = function (name, value, inline) {
         var _a;
         if (inline === void 0) { inline = false; }
@@ -112,6 +162,13 @@ var Embed = /** @class */ (function () {
         });
         return this;
     };
+    /**
+     * Set image of the embed
+     * @param {string} url
+     * @param {string} height
+     * @param {string} width
+     * @returns {Embed}
+     */
     Embed.prototype.setImage = function (url, height, width) {
         this.image = {
             url: url,
@@ -120,6 +177,13 @@ var Embed = /** @class */ (function () {
         };
         return this;
     };
+    /**
+     * Set thumbnail of the embed
+     * @param {string} url
+     * @param {string} height
+     * @param {string} width
+     * @returns {Embed}
+     */
     Embed.prototype.setThumbnail = function (url, height, width) {
         this.thumbnail = {
             url: url,
@@ -128,6 +192,13 @@ var Embed = /** @class */ (function () {
         };
         return this;
     };
+    /**
+     * Set video of the embed
+     * @param {string} url
+     * @param {string} height
+     * @param {string} width
+     * @returns {Embed}
+     */
     Embed.prototype.setVideo = function (url, height, width) {
         this.video = {
             url: url,
@@ -136,6 +207,12 @@ var Embed = /** @class */ (function () {
         };
         return this;
     };
+    /**
+     * Set the provider of the embed
+     * @param {string} name
+     * @param {string} url
+     * @returns {Embed}
+     */
     Embed.prototype.setProvider = function (name, url) {
         this.provider = {
             name: name,
@@ -143,6 +220,13 @@ var Embed = /** @class */ (function () {
         };
         return this;
     };
+    /**
+     * Set the author of the embed
+     * @param {string} name
+     * @param {string} url
+     * @param {string} icon_url
+     * @returns {Embed}
+     */
     Embed.prototype.setAuthor = function (name, url, icon_url) {
         this.author = {
             name: name,
@@ -153,4 +237,4 @@ var Embed = /** @class */ (function () {
     };
     return Embed;
 }());
-exports.default = Embed;
+exports.Embed = Embed;

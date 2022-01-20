@@ -1,6 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Member = void 0;
 var Member = /** @class */ (function () {
+    /**
+    * Creates a new member
+    * @class
+    * @param {object} [data={}] - Member data
+    * @see {@link https://discord.com/developers/docs/resources/guild#guild-member-object} for further information
+    * @returns {Member}
+    */
     function Member(data) {
         if (data) {
             if ("user" in data) {
@@ -40,4 +48,4 @@ var Member = /** @class */ (function () {
     }
     return Member;
 }());
-exports.default = Member;
+exports.Member = Member;

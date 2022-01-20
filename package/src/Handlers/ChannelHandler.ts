@@ -1,4 +1,4 @@
-import Channel from "../Constructors/Channel";
+import { Channel } from "../Constructors/Channel";
 import sendRequest from "./RequestHandler";
 
 export default class ChannelHandler {

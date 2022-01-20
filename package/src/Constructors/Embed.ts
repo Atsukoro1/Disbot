@@ -1,55 +1,62 @@
 import Color = require("color");
 
-export default class Embed {
-    title: string | undefined;
-    type: string | undefined;
-    description: string | undefined;
-    url: string | undefined;
-    timestamp: string | undefined;
-    color: string | number | undefined;
+export class Embed {
+    title?: string;
+    type?: string;
+    description?: string;
+    url?: string;
+    timestamp?: string;
+    color?: string | number;
 
-    footer: {
-        text: string | undefined;
-        icon_url: string | undefined;
-    } | undefined;
+    footer?: {
+        text: string;
+        icon_url: string;
+    };
 
-    fields: [
+    fields?: [
         {
-            name: string | undefined;
-            value: string | undefined;
-            inline: boolean | undefined;
+            name: string;
+            value: string;
+            inline: boolean;
         }
     ] | any;
 
-    image: {
-        url: string | undefined;
-        height: number | undefined;
-        width: number | undefined;
-    } | undefined;
+    image?: {
+        url: string;
+        height: number;
+        width: number;
+    };
 
-    thumbnail: {
-        url: string | undefined;
-        height: number | undefined;
-        width: number | undefined;
-    } | undefined;
+    thumbnail?: {
+        url: string;
+        height: number;
+        width: number;
+    };
 
-    video: {
-        url: string | undefined;
-        height: number | undefined;
-        width: number | undefined;
-    } | undefined;
+    video?: {
+        url: string;
+        height: number;
+        width: number;
+    } ;
 
-    provider: {
-        name: string | undefined;
-        url: string | undefined;
-    } | undefined;
+    provider?: {
+        name: string;
+        url: string;
+    } ;
 
-    author: {
-        name: string | undefined;
-        url: string | undefined;
-        icon_url: string | undefined;
-    } | undefined;
+    author?: {
+        name: string;
+        url: string;
+        icon_url: string;
+    };
 
+    /**
+    * Creates a new embed
+    * @class
+    * @param {object} [data={}] - Embed data
+    * @see {@link https://discord.com/developers/docs/resources/channel#embed-object} for further information
+    * @returns {Embed}
+    */
     constructor(data:any) {
         if(data) {
             if("title" in data) {
@@ -128,37 +135,73 @@ export default class Embed {
         }
     }
 
-    setTitle(title:string) {
+    /**
+     * Set title of the embed
+     * @param {string} title
+     * @returns {Embed}
+     */
+    setTitle(title:string) : Embed {
         this.title = title;
         return this;
     }
 
-    setType(type:string) {
+    /**
+     * Set type of the embed
+     * @param {string} type
+     * @returns {Embed}
+     */
+    setType(type:string) : Embed {
         this.type = type;
         return this;
     }
 
-    setDescription(description:string) {
+    /**
+     * Set description of the embed
+     * @param {string} description 
+     * @returns {Embed}
+     */
+    setDescription(description:string) : Embed {
         this.description = description;
         return this;
     }
 
-    setUrl(url:string) {
+    /**
+     * Set url of the embed
+     * @param {string} url 
+     * @returns {Embed}
+     */
+    setUrl(url:string) : Embed {
         this.url = url;
         return this;
     }
 
-    setTimestamp(timestamp:string = new Date().toISOString()) {
+    /**
+     * Set timestamp of the embed located in the footer
+     * @param {string} timestamp 
+     * @returns {Embed}
+     */
+    setTimestamp(timestamp:string = new Date().toISOString()) : Embed {
         this.timestamp = timestamp;
         return this;
     }
 
-    setColor(color:number) {
-        this.color = new Color(color).rgbNumber();;
+    /**
+     * Set color of the embed
+     * @param {string} color
+     * @returns {Embed}
+     */
+    setColor(color:string) : Embed {
+        this.color = new Color(color).rgbNumber();
         return this;
     }
 
-    setFooter(text:string, icon_url:string) {
+    /**
+     * Set parameters of the embed footer
+     * @param {string} text 
+     * @param {string} icon_url 
+     * @returns {Embed}
+     */
+    setFooter(text:string, icon_url:string) : Embed {
         this.footer = {
             text: text,
             icon_url: icon_url
@@ -166,7 +209,14 @@ export default class Embed {
         return this;
     };
 
-    addField(name:string, value:string, inline:boolean = false) {
+    /**
+     * Add fields to the footer
+     * @param {string} name 
+     * @param {string} value 
+     * @param {string} inline 
+     * @returns {Embed}
+     */
+    addField(name:string, value:string, inline:boolean = false) : Embed {
         this.fields = this.fields ?? [];
         this.fields.push({
             name: name,
@@ -176,7 +226,14 @@ export default class Embed {
         return this;
     }
 
-    setImage(url:string, height:number, width:number) {
+    /**
+     * Set image of the embed
+     * @param {string} url 
+     * @param {string} height 
+     * @param {string} width 
+     * @returns {Embed}
+     */
+    setImage(url:string, height:number, width:number) : Embed {
         this.image = {
             url: url,
             height: height,
@@ -185,7 +242,14 @@ export default class Embed {
         return this;
     }
 
-    setThumbnail(url:string, height:number, width:number) {
+    /**
+     * Set thumbnail of the embed
+     * @param {string} url 
+     * @param {string} height 
+     * @param {string} width 
+     * @returns {Embed}
+     */
+    setThumbnail(url:string, height:number, width:number) : Embed {
         this.thumbnail = {
             url: url,
             height: height,
@@ -194,7 +258,14 @@ export default class Embed {
         return this;
     }
 
-    setVideo(url:string, height:number, width:number) {
+    /**
+     * Set video of the embed
+     * @param {string} url 
+     * @param {string} height 
+     * @param {string} width 
+     * @returns {Embed}
+     */
+    setVideo(url:string, height:number, width:number) : Embed {
         this.video = {
             url: url,
             height: height,
@@ -203,7 +274,13 @@ export default class Embed {
         return this;
     }
 
-    setProvider(name:string, url:string) {
+    /**
+     * Set the provider of the embed
+     * @param {string} name 
+     * @param {string} url 
+     * @returns {Embed}
+     */
+    setProvider(name:string, url:string) : Embed {
         this.provider = {
             name: name,
             url: url
@@ -211,7 +288,14 @@ export default class Embed {
         return this;
     }
 
-    setAuthor(name:string, url:string, icon_url:string) {
+    /**
+     * Set the author of the embed
+     * @param {string} name 
+     * @param {string} url 
+     * @param {string} icon_url 
+     * @returns {Embed}
+     */
+    setAuthor(name:string, url:string, icon_url:string) : Embed {
         this.author = {
             name: name,
             url: url,

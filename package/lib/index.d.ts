@@ -1,3 +1,4 @@
 import { Client } from "./Clients/Client";
-import { default as Embed } from "./Constructors/Embed";
-export { Client, Embed };
+import { Embed } from "./Constructors/Embed";
+import { Button } from "./Constructors/Button";
+export { Client, Embed, Button };

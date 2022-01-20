@@ -36,16 +36,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Channel = void 0;
 var ChannelHandler_1 = require("../Handlers/ChannelHandler");
 var Message_1 = require("./Message");
+var ChannelType_1 = require("./Types/ChannelType");
 var Channel = /** @class */ (function () {
+    /**
+    * Creates a new channel
+    * @class
+    * @param {object} [data={}] - Channel data
+    * @see {@link https://discord.com/developers/docs/resources/channel#channel-object} for further information
+    * @returns {Channel}
+    */
     function Channel(data) {
         if (data) {
             if ("id" in data) {
                 this.id = data.id;
             }
             if ("type" in data) {
-                this.type = data.type;
+                var type = ChannelType_1.default.find(function (m) { return m[1] === data.type; });
+                this.type = type[0] ? type[0] : ChannelType_1.default[0][0];
             }
             if ("guild_id" in data) {
                 this.guildId = data.guild_id;
@@ -370,4 +380,4 @@ var Channel = /** @class */ (function () {
     };
     return Channel;
 }());
-exports.default = Channel;
+exports.Channel = Channel;
