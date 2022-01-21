@@ -1,15 +1,15 @@
 export declare class Member {
-    user: Object | undefined;
-    nick: string | undefined;
-    avatar: string | undefined;
-    roles: Array<String> | undefined;
-    joinedAt: any;
-    premiumSince: any;
-    deaf: boolean | undefined;
-    mute: boolean | undefined;
-    pending: boolean | undefined;
-    permissions: string | undefined;
-    communicationDisabledUntil: any;
+    user?: Object;
+    nick?: string;
+    avatar?: string;
+    roles?: Array<String>;
+    joinedAt?: any;
+    premiumSince?: any;
+    deaf?: boolean;
+    mute?: boolean;
+    pending?: boolean;
+    permissions?: string;
+    communicationDisabledUntil?: string;
     /**
     * Creates a new member
     * @class

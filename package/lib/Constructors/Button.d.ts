@@ -1,5 +1,5 @@
 export declare class Button {
-    type?: number;
+    type: number;
     style?: number | any;
     label?: string;
     emoji?: {

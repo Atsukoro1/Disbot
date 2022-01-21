@@ -16,7 +16,7 @@ var Button = /** @class */ (function () {
         if ("style" in data) {
             var type = ButtonStyleType_1.default.find(function (el) { return el[0] == data.style; });
             if (!type)
-                throw new Error("Button style " + data.style + " does not exist, see https://discord.com/developers/docs/interactions/message-components#button-object-button-styles");
+                throw new Error("Button style ".concat(data.style, " does not exist, see https://discord.com/developers/docs/interactions/message-components#button-object-button-styles"));
             this.style = type[1];
         }
         if ("label" in data) {

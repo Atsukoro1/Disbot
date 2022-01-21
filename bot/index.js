@@ -1,4 +1,4 @@
-const { Client, Embed, Button } = require("disbot");
+const { Client, Embed, SelectMenu } = require("disbot");
 const client = new Client(["GUILDS", "GUILD_MESSAGES"]);
 
 client.on("ready", () => {
@@ -11,13 +11,12 @@ client.on("message", async message => {
         .setAuthor("ahoj", "https://www.youtube.com/watch?v=N51MEUdWJvQ", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Osulogo.png/800px-Osulogo.png")
         .setDescription("Ahoj jak se mas");
 
-        let b = new Button()
-        .setEmoji("🤨")
-        .setLabel("When a sussy baka")
-        .setStyle("primary")
-        .setCustomId("baka")
+        let s = new SelectMenu()
+        .setCustomId("ddsds")
+        .addOption({ label: "aha", value: "niggus", description: "ahoj", emoji: "😃" })
+        .setPlaceholder("Select me nigga");
 
-        await message.channel.send({ embed: e, components: [{ type: 1, components: [b] }] });
+        await message.channel.send({ embed: e, components: [{ type: 1, components: [s] }] });
     }
 })
 

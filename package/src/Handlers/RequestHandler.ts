@@ -27,7 +27,7 @@ export default async function sendRequest(method:string, data:string | any, path
         const res = await axios(config);
         return res.data;
     } catch (err:object|any) {
-        console.log(err.response.data.errors.components["0"].components["0"].emoji);
+        console.log(err.response.data);
         if (err.response.data.retry_after) {
             setTimeout(() => {
                 sendRequest(method, data, path, token);

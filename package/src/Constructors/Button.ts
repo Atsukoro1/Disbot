@@ -1,7 +1,7 @@
 import ButtonStyleTypes from "./Types/ButtonStyleType"
 
 export class Button {
-    type?: number;
+    type!: number;
     style?: number | any;
     label?: string;
     emoji?: {
@@ -23,7 +23,7 @@ export class Button {
 
         if("style" in data) {
             const type = ButtonStyleTypes.find(el => el[0] == data.style);
-            if(!type) throw new Error("Button style " + data.style + " does not exist, see https://discord.com/developers/docs/interactions/message-components#button-object-button-styles");
+            if(!type) throw new Error(`Button style ${data.style} does not exist, see https://discord.com/developers/docs/interactions/message-components#button-object-button-styles`);
             this.style = type[1];
         }
 
