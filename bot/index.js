@@ -1,4 +1,4 @@
-const { Client, Embed, SelectMenu } = require("disbot");
+const { Client, Embed, SelectMenu, ComponentContainer } = require("disbot");
 const client = new Client(["GUILDS", "GUILD_MESSAGES"]);
 
 client.on("ready", () => {
@@ -16,7 +16,10 @@ client.on("message", async message => {
         .addOption({ label: "aha", value: "niggus", description: "ahoj", emoji: "😃" })
         .setPlaceholder("Select me nigga");
 
-        await message.channel.send({ embed: e, components: [{ type: 1, components: [s] }] });
+        let cc = new ComponentContainer()
+        .addComponent(e);
+
+        await message.channel.send({ embed: e, components: [cc] });
     }
 })
 

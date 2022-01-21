@@ -2,6 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectMenu = void 0;
 var SelectMenu = /** @class */ (function () {
+    /**
+    * Creates a new select menu
+    * @class
+    * @param {object} [data={}] - Select menu data
+    * @see {@link https://discord.com/developers/docs/interactions/message-components#select-menu-object} for further information
+    * @returns {SelectMenu}
+    */
     function SelectMenu(data) {
         if (data === void 0) { data = {}; }
         this.type = 3;

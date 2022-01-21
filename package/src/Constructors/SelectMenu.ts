@@ -15,6 +15,13 @@ export class SelectMenu {
     max_values?: number;
     disabled?: boolean;
 
+    /**
+    * Creates a new select menu
+    * @class
+    * @param {object} [data={}] - Select menu data
+    * @see {@link https://discord.com/developers/docs/interactions/message-components#select-menu-object} for further information
+    * @returns {SelectMenu}
+    */
     constructor(data:any = {}) {
         this.type = 3;
 
