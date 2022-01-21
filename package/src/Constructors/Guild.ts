@@ -1,5 +1,14 @@
 import { Member } from "./Member";
 import { Channel } from "./Channel";
+import {
+    DefaultMessageNoficationLevelTypes,
+    ExplicitContentFilterTypes,
+    MFALevelTypes,
+    VerificationLevelTypes,
+    GuildNSFWLevelTypes,
+    PremiumTierTypes
+} from "./Types/GuildTypes";
+import GuildHandler from "../Handlers/GuildHandler";
 
 export class Guild {
     id!: string;
@@ -113,15 +122,18 @@ export class Guild {
         }
 
         if("verification_level" in data) {
-            this.verification_level = data.verification_level;
+            let type:any = VerificationLevelTypes.find(t => t[1] === data.verification_level)
+            this.verification_level = type[0];
         }
 
         if("default_message_notifications" in data) {
-            this.default_message_notifications = data.default_message_notifications;
+            let type:any = DefaultMessageNoficationLevelTypes.find(t => t[1] === data.default_message_notifications)
+            this.default_message_notifications = type[0];
         }
 
         if("explicit_content_filter" in data) {
-            this.explicit_content_filter = data.explicit_content_filter;
+            let type:any = ExplicitContentFilterTypes.find(t => t[1] === data.explicit_content_filter)
+            this.explicit_content_filter = type[0];
         }
 
         if("roles" in data) {
@@ -137,7 +149,8 @@ export class Guild {
         }
 
         if("mfa_level" in data) {
-            this.mfa_level = data.mfa_level;
+            let type:any = MFALevelTypes.find(t => t[1] === data.mfa_level)
+            this.mfa_level = type[0];
         }
 
         if("application_id" in data) {
@@ -213,7 +226,8 @@ export class Guild {
         }
 
         if("premium_tier" in data) {
-            this.premium_tier = data.premium_tier;
+            let type:any = PremiumTierTypes.find(t => t[1] === data.premium_tier)
+            this.premium_tier = type[0];
         }
 
         if("premium_subscription_count" in data) {
@@ -245,7 +259,8 @@ export class Guild {
         }
 
         if("nsfw_level" in data) {
-            this.nsfw_level = data.nsfw_level;
+            let type:any = GuildNSFWLevelTypes.find(t => t[1] === data.nsfw_level)
+            this.nsfw_level = type[0];
         }
 
         if("stage_instances" in data) {
@@ -263,5 +278,34 @@ export class Guild {
         if("premium_progress_bar_enabled" in data) {
             this.premium_progress_bar_enabled = data.premium_progress_bar_enabled;
         }
+    }
+
+    /**
+     * Fetch guild
+     * @param {string} [id] - If of the guild you want to fetch, if empty the guild will be fetched from message guild id
+     * @example const fetchedGuild = await message.guild.get("482913781983712939");
+     * @returns {Guild | boolean}
+     */
+    async get(params: string | undefined) : Promise<Guild | boolean> {
+        const handler = new GuildHandler(this);
+        const response = await handler.get(params);
+        return response;
+    }
+
+    /**
+     * Fetch guild previes
+     * @param {string} [id] - If of the guild you want to fetch, if empty the guild will be fetched from message guild id
+     * @example const fetchedGuild = await message.guild.getGuildPreview("482913781983712939");
+     * @returns {Guild | boolean}
+     */
+    async getGuildPreview(params: string | undefined) : Promise<Guild | boolean> {
+        const handler = new GuildHandler(this);
+        const response = await handler.getPreview(params);
+        return response;
+    }
+
+    async modify(params: object) {
+        const handler = new GuildHandler(this);
+        const response = await handler.modify(params);
     }
 }

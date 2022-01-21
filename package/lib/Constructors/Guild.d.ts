@@ -54,4 +54,19 @@ export declare class Guild {
     guild_scheduled_events?: Array<object>;
     premium_progress_bar_enabled: boolean;
     constructor(data: any);
+    /**
+     * Fetch guild
+     * @param {string} [id] - If of the guild you want to fetch, if empty the guild will be fetched from message guild id
+     * @example const fetchedGuild = await message.guild.get("482913781983712939");
+     * @returns {Guild | boolean}
+     */
+    get(params: string | undefined): Promise<Guild | boolean>;
+    /**
+     * Fetch guild previes
+     * @param {string} [id] - If of the guild you want to fetch, if empty the guild will be fetched from message guild id
+     * @example const fetchedGuild = await message.guild.getGuildPreview("482913781983712939");
+     * @returns {Guild | boolean}
+     */
+    getGuildPreview(params: string | undefined): Promise<Guild | boolean>;
+    modify(params: object): Promise<void>;
 }

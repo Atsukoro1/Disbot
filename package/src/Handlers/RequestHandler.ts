@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function sendRequest(method:string, data:string | any, path:string, token:string) {
+export default async function sendRequest(method?:string, data?:string | any, path?:string, token?:string) {
     try {
         var config:any;
 
