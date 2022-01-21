@@ -55,6 +55,7 @@ var Channel_1 = require("./Channel");
 var Member_1 = require("./Member");
 var User_1 = require("./User");
 var Embed_1 = require("./Embed");
+var Guild_1 = require("./Guild");
 var Message = /** @class */ (function () {
     /**
     * Creates a new message
@@ -69,7 +70,7 @@ var Message = /** @class */ (function () {
                 var type = MessageType_1.default.find(function (m) { return m[1] === data.type; });
                 this.type = type[0] ? type[0] : MessageType_1.default[0][0];
             }
-            this.guildId = data.guild_id;
+            this.guild = new Guild_1.Guild({ id: data.guild_id });
             if ("id" in data) {
                 this.id = data.id;
             }

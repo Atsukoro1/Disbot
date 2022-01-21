@@ -7,19 +7,7 @@ client.on("ready", () => {
 
 client.on("message", async message => {
     if(message.content == "bakus") {
-        let e = new Embed()
-        .setAuthor("ahoj", "https://www.youtube.com/watch?v=N51MEUdWJvQ", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Osulogo.png/800px-Osulogo.png")
-        .setDescription("Ahoj jak se mas");
-
-        let s = new SelectMenu()
-        .setCustomId("ddsds")
-        .addOption({ label: "aha", value: "niggus", description: "ahoj", emoji: "😃" })
-        .setPlaceholder("Select me nigga");
-
-        let cc = new ComponentContainer()
-        .addComponent(e);
-
-        await message.channel.send({ embed: e, components: [cc] });
+        console.log(message)
     }
 })
 

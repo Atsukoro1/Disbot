@@ -28,8 +28,8 @@ export class ComponentContainer {
      * @returns {ComponentContainer}
      */
     addComponent(component: any) : ComponentContainer {
-        if(this.components.filter(comp => comp.constructor.name == "SelectMenu")) throw new Error("Component container can't contain more components when it has a select menu inside it.");
-        if(typeof(component) != "object" || (component.constructor.name != "Button" || component.constructor.name != "SelectMenu")) throw new Error("Component must be a button or a select menu.")
+        if(this.components.filter(comp => comp.constructor.name == "SelectMenu").length > 0) throw new Error("Component container can't contain more components when it has a select menu inside it.");
+        if(typeof(component) != "object") throw new Error("Component must be a button or a select menu.")
         this.components.push(component);
         return this;
     }

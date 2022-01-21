@@ -24,9 +24,9 @@ var ComponentContainer = /** @class */ (function () {
      * @returns {ComponentContainer}
      */
     ComponentContainer.prototype.addComponent = function (component) {
-        if (this.components.filter(function (comp) { return comp.constructor.name == "SelectMenu"; }))
+        if (this.components.filter(function (comp) { return comp.constructor.name == "SelectMenu"; }).length > 0)
             throw new Error("Component container can't contain more components when it has a select menu inside it.");
-        if (typeof (component) != "object" || (component.constructor.name != "Button" || component.constructor.name != "SelectMenu"))
+        if (typeof (component) != "object")
             throw new Error("Component must be a button or a select menu.");
         this.components.push(component);
         return this;

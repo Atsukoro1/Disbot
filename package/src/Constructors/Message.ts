@@ -7,10 +7,11 @@ import { Channel } from "./Channel";
 import { Member } from "./Member";
 import { User } from "./User";
 import { Embed } from "./Embed";
+import { Guild } from "./Guild";
 
 export class Message {
     type?: number;
-    guildId?: string;
+    guild?: Guild;
     id?: string;
     createdAt?: Date;
     editedTimestamp?: Date;
@@ -51,7 +52,7 @@ export class Message {
                 this.type = type[0] ? type[0] : MessageTypes[0][0];
             }
     
-            this.guildId = data.guild_id;
+            this.guild = new Guild({ id: data.guild_id });
     
             if ("id" in data) {
                 this.id = data.id;

@@ -3,9 +3,10 @@ import { Channel } from "./Channel";
 import { Member } from "./Member";
 import { User } from "./User";
 import { Embed } from "./Embed";
+import { Guild } from "./Guild";
 export declare class Message {
     type?: number;
-    guildId?: string;
+    guild?: Guild;
     id?: string;
     createdAt?: Date;
     editedTimestamp?: Date;
