@@ -1,31 +1,11 @@
 import { Guild } from "../Constructors/Guild";
-interface IModifyGuild {
-    name?: string;
-    region?: string;
-    verificationLevel?: number;
-    defaultMessageNotifications?: number;
-    explicitContentFilter?: number;
-    afkChannelId?: string;
-    afkTimeout?: number;
-    icon?: File;
-    ownerId?: string;
-    splash?: File;
-    discoverySplash?: File;
-    banner?: File;
-    systemChannelId?: string;
-    systemChannelFlags?: number;
-    rulesChannelId?: string;
-    publicUpdatesChannelId?: string;
-    preferredLocale?: string;
-    features?: Array<object>;
-    description?: string;
-    premiumProgressBarEnabled?: boolean;
-}
+import { Channel } from "../Constructors/Channel";
 export default class GuildHandler {
     guild: Guild;
     constructor(data: Guild);
     get(params: string | undefined): Promise<Guild | boolean>;
     getPreview(params: string | undefined): Promise<Guild | boolean>;
-    modify(params: IModifyGuild | any): Promise<void>;
+    modify(params: any): Promise<Guild | boolean>;
+    delete(params: string): void;
+    fetchChannels(params: string): Promise<Array<Channel> | boolean>;
 }
-export {};

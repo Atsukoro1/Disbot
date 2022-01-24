@@ -10,6 +10,29 @@ import {
 } from "./Types/GuildTypes";
 import GuildHandler from "../Handlers/GuildHandler";
 
+interface IModifyGuild {
+    name?: string;
+    region?: string;
+    verificationLevel?: number;
+    defaultMessageNotifications?: number;
+    explicitContentFilter?: number;
+    afkChannelId?: string;
+    afkTimeout?: number;
+    icon?: string,
+    ownerId?: string;
+    splash?: string,
+    discoverySplash?: File,
+    banner?: string,
+    systemChannelId?: string;
+    systemChannelFlags?: number;
+    rulesChannelId?: string;
+    publicUpdatesChannelId?: string;
+    preferredLocale?: string;
+    features?: Array<object>,
+    description?: string;
+    premiumProgressBarEnabled?: boolean;
+}
+
 export class Guild {
     id!: string;
     name!: string;
@@ -304,8 +327,52 @@ export class Guild {
         return response;
     }
 
-    async modify(params: object) {
+    /**
+     * Modify guild settings
+     * @param {object} params - Params that you want to modify
+     * @param {string} params.name - Guild name
+     * @param {string} params.region - Guild region
+     * @param {number} params.verificationLevel - Guild verification level
+     * @param {number} params.defaultMessageNotifications - Guild default message notifications
+     * @param {number} params.explicitContentFilter - Guild explicit content filter
+     * @param {string} params.afkChannelId - Guild afk channel id
+     * @param {number} params.afkTimeout - Guild afk timeout
+     * @param {string} params.icon - Guild icon (Should be path full path to image or link to image including image extension like .png)
+     * @param {string} params.ownerId - Guild owner id
+     * @param {string} params.splash - Guild splash (Should be path full path to image or link to image including image extension like .png)
+     * @param {string} params.banner - Guild banner (Should be path full path to image or link to image including image extension like .png)
+     * @param {string} params.systemChannelId - Guild system channel id
+     * @param {number} params.systemChannelFlags - Guild system channel flags
+     * @param {string} params.rulesChannelId - Guild rules channel id
+     * @param {string} params.publicUpdatesChannelId - Guild public updates channel id
+     * @param {string} params.preferredLocale - Guild preferred locale
+     * @param {Array<object>} params.features - Guild features
+     * @param {string} params.description - Guild description
+     * @param {boolean} params.premiumProgressBarEnabled - Guild premium progress bar enabled 
+     * @returns {Promise<Guild | boolean>} - Modified Guild object
+     */
+    async modify(params: IModifyGuild) : Promise<Guild | boolean> {
         const handler = new GuildHandler(this);
         const response = await handler.modify(params);
+        return response;
+    }
+
+    /**
+     * Delete a guild
+     * @param {string} [id] - id of the guild
+     */
+    delete(params: string) : void {
+        new GuildHandler(this).delete(params);
+    }
+
+    /**
+     * Fetch all guild channels
+     * @param {string} [id] - id of the guild
+     * @returns {Promise<Array<Channel> | boolean>}
+     */
+    async fetchChannels(params: string) : Promise<Array<Channel> | boolean> {
+        const handler = new GuildHandler(this);
+        const response = await handler.fetchChannels(params);
+        return response;
     }
 }
